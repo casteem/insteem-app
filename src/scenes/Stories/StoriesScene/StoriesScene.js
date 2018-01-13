@@ -1,8 +1,8 @@
 import React from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import { map } from "ramda";
 import { View, Text } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 
 import StoryList from "../../../components/StoryList";
 
@@ -22,5 +22,11 @@ const Query = gql`
     }
   }
 `;
+
+StoriesScene.navigationOptions = {
+  tabBarIcon: ({ tintColor }) => (
+    <Icon name="ios-list" color={tintColor} size={30} />
+  )
+};
 
 export default graphql(Query)(StoriesScene);
