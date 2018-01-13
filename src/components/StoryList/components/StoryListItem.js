@@ -6,11 +6,15 @@ const Item = styled.View`
   padding: 12px;
 `;
 
+const Title = styled.Text`
+  font-weight: bold;
+`;
+
 const StoryListItem = props => {
   const { story } = props;
   return (
     <Item>
-      <Text>{story.title}</Text>
+      <Title>{story.title}</Title>
     </Item>
   );
 };

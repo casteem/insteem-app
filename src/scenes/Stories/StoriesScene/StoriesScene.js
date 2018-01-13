@@ -18,6 +18,7 @@ const Query = gql`
       id
       title
       author
+      permlink
     }
   }
 `;
