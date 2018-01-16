@@ -31,6 +31,8 @@
     "react-native": "0.50.3",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0-beta.26",
+    "redux": "^3.7.2",
+    "redux-persist": "^5.4.0",
     "styled-components": "^2.4.0"
   }
 }
