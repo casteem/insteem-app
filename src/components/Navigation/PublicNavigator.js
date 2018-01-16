@@ -13,7 +13,7 @@ const PublicNavigator = TabNavigator(
     // Profile: { screen: ProfileNavigator }
   },
   {
-    swipeEnabled: false,
+    swipeEnabled: true,
     lazy: true,
     tabBarOptions: {
       showLabel: true
