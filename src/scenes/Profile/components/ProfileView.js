@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-// import SignIn from "insteem/src/scenes/Auth/SignIn";
+import SignIn from "../../../../src/scenes/Auth/SigninScene";
 
 const ProfileView = props => {
   return (
