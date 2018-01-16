@@ -35,6 +35,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
+// TODO: State change doesn't trigger rerender. Solve it.
 const Switch = compose(
   withProps(props => mapStateToProps(store.getState(), props)),
   branch(
