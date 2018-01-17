@@ -1,13 +1,13 @@
 import React from "react";
 import { TabNavigator } from "react-navigation";
 
-import StoriesScene from "../../scenes/Stories/StoriesScene";
+import StoriesNavigator from "../../scenes/Stories/StoriesNavigator";
 import ProfileScene from "../../scenes/Profile/ProfileScene";
 
 // The main navigation of the app will be TabNavigator.
 const MainNavigator = TabNavigator(
   {
-    Home: { screen: StoriesScene },
+    Home: { screen: StoriesNavigator },
     // Search: { screen: SearchNavigator },
     // New: { screen: SubmitNavigator },
     // Votes: { screen: FollowerNavigator },

@@ -1,12 +1,19 @@
-import React from 'react'
-import {View} from 'react-native'
+import React from "react";
+import { View, Button } from "react-native";
+import StoriesScene from "../Stories/StoriesScene";
 
-const Public = (props) => {
+const Public = props => {
   return (
     <View>
-
+      <StoriesScene />
     </View>
-  )
-}
+  );
+};
 
-export default Public
+Public.navigationOptions = ({ navigation }) => ({
+  headerRight: (
+    <Button title="Sign In" onPress={() => navigation.navigate("Signin")} />
+  )
+});
+
+export default Public;
