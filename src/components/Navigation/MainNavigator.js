@@ -17,7 +17,7 @@ const MainNavigator = TabNavigator(
     swipeEnabled: false,
     lazy: true,
     tabBarOptions: {
-      showLabel: true
+      showLabel: false
     }
   }
 );

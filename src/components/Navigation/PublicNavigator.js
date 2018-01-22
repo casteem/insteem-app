@@ -17,7 +17,7 @@ const PublicNavigator = StackNavigator(
     swipeEnabled: true,
     lazy: true,
     tabBarOptions: {
-      showLabel: true
+      showLabel: false
     }
   }
 );
