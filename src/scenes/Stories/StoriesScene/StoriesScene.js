@@ -4,12 +4,12 @@ import gql from "graphql-tag";
 import { View, Text, Button } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
+import Loader from "../../../components/Elements/Loader";
 import StoryList from "../../../components/StoryList";
 
 const StoriesScene = props => {
   const { data: { loading, getDiscussions: stories, refetch } } = props;
-  if (loading) return <Text>Loading</Text>;
-  console.log(props);
+  if (loading) return <Loader />;
   return <StoryList stories={stories} refresh={refetch} />;
 };
 
