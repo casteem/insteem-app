@@ -7,15 +7,17 @@ import Icon from "react-native-vector-icons/Ionicons";
 import StoryList from "../../../components/StoryList";
 
 const StoriesScene = props => {
-  const { data: { loading, getDiscussions: stories } } = props;
+  const { data: { loading, getDiscussions: stories, refetch } } = props;
   if (loading) return <Text>Loading</Text>;
-  return <StoryList stories={stories} />;
+  console.log(props);
+  return <StoryList stories={stories} refresh={refetch} />;
 };
 
 const Query = gql`
   {
     getDiscussions {
       id
+      created
       title
       author
       permlink

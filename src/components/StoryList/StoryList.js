@@ -11,7 +11,7 @@ const renderStories = map(story => (
 const _keyExtractor = (item, index) => item.permlink;
 
 const StoryList = props => {
-  const { stories, navigation } = props;
+  const { stories, navigation, refresh } = props;
   return (
     <FlatList
       data={stories}
@@ -19,6 +19,8 @@ const StoryList = props => {
       renderItem={story => (
         <StoryListItem story={story.item} navigation={navigation} />
       )}
+      onRefresh={refresh}
+      refreshing={false}
     />
   );
 };
