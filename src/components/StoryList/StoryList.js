@@ -11,12 +11,14 @@ const renderStories = map(story => (
 const _keyExtractor = (item, index) => item.permlink;
 
 const StoryList = props => {
-  const { stories } = props;
+  const { stories, navigation } = props;
   return (
     <FlatList
       data={stories}
       keyExtractor={_keyExtractor}
-      renderItem={story => <StoryListItem story={story.item} />}
+      renderItem={story => (
+        <StoryListItem story={story.item} navigation={navigation} />
+      )}
     />
   );
 };

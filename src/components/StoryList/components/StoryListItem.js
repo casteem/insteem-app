@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
-import { View, Text } from "react-native";
+import { View, Text, TouchableWithoutFeedback } from "react-native";
+import { withNavigation } from "react-navigation";
 
 const Item = styled.View`
   padding: 12px;
@@ -11,12 +12,16 @@ const Title = styled.Text`
 `;
 
 const StoryListItem = props => {
-  const { story } = props;
+  const { story, navigation } = props;
   return (
-    <Item>
-      <Title>{story.title}</Title>
-    </Item>
+    <TouchableWithoutFeedback
+      onPress={() => navigation.navigate("Story", { story: story })}
+    >
+      <Item>
+        <Title>{story.title}</Title>
+      </Item>
+    </TouchableWithoutFeedback>
   );
 };
 
-export default StoryListItem;
+export default withNavigation(StoryListItem);
