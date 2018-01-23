@@ -67,6 +67,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+SigninScene.navigationOptions = {
+  title: "Sign In"
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(SigninScene);
 
 // Style for the component.

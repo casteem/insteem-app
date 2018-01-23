@@ -11,6 +11,7 @@ const Public = props => {
 };
 
 Public.navigationOptions = ({ navigation }) => ({
+  title: "Insteem",
   headerRight: (
     <Button title="Sign In" onPress={() => navigation.navigate("Signin")} />
   )
