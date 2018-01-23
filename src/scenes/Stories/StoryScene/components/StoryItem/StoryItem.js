@@ -1,6 +1,8 @@
 import React from "react";
 import _ from "lodash";
 import { StyleSheet, View, Text, ScrollView, WebView } from "react-native";
+import Markdown, { getUniqueID } from "react-native-markdown-renderer";
+import MarkdownIt from "markdown-it";
 // import HTMLView from "react-native-htmlview";
 // import Markdown from "react-native-easy-markdown";
 
@@ -11,6 +13,18 @@ import { StyleSheet, View, Text, ScrollView, WebView } from "react-native";
 class StoryItem extends React.Component {
   render() {
     const { story } = this.props;
+    const rules = {
+      html_inline: (node, children, parent, styles) => (
+        <View key={getUniqueID()}>
+          <Text>[{children}]</Text>
+        </View>
+      ),
+      html_block: (node, children, parent, styles) => (
+        <View key={getUniqueID()}>
+          <Text>[{children}]</Text>
+        </View>
+      )
+    };
     // Get the format of the post: `markdown`, `html` or `markdown+html`.
     // NOTE: json_metadata returns an Object inside a String, so we have to
     // parse it first.
@@ -19,6 +33,17 @@ class StoryItem extends React.Component {
       <ScrollView style={style.container}>
         {/*<PostHeader post={post} />*/}
         <Text style={style.title}>{story.title}</Text>
+        <Markdown
+          rules={rules}
+          markdownit={MarkdownIt({
+            html: true,
+            linkify: true,
+            typographer: true
+          })}
+        >
+          {" "}
+          {story.body}
+        </Markdown>
         {/*        {format === "html" ? (
           <HTMLView value={story.body} width="100%" height="100%" />
         ) : (

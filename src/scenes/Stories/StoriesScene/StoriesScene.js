@@ -17,6 +17,7 @@ const Query = gql`
   {
     getDiscussions {
       id
+      body
       created
       title
       author
