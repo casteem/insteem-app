@@ -3,6 +3,12 @@ import { StyleSheet, View, TextInput, Button } from "react-native";
 import { connect } from "react-redux";
 import { signin } from "../../services/auth/actions.js";
 import steem from "steem";
+import styled from "styled-components/native";
+
+const Disclaimer = styled.Text`
+  color: gray;
+  margin-top: 10px;
+`;
 
 // SignIn Form.
 class SigninScene extends React.Component {
@@ -48,6 +54,11 @@ class SigninScene extends React.Component {
           clearButtonMode="while-editing"
         />
         <Button onPress={e => this.signin(e)} title="Signin" />
+        <Disclaimer>
+          Use your steem username and anything as password for now. No posting
+          or curating implemented at the moment so no need to validate user
+          credentials. This will be possible soon.
+        </Disclaimer>
       </View>
     );
   }
