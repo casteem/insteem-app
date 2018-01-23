@@ -26,7 +26,13 @@ const StoryListItem = props => {
   const { story, navigation } = props;
   return (
     <TouchableWithoutFeedback
-      onPress={() => navigation.navigate("Story", { story: story })}
+      onPress={() =>
+        navigation.navigate("Story", {
+          story: story,
+          author: story.author,
+          permlink: story.permlink
+        })
+      }
     >
       <Item>
         <Title>{story.title}</Title>
