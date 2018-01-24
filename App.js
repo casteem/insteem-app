@@ -30,8 +30,8 @@ const persistor = persistStore(store);
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isSignedIn: state.auth.isSignedIn
-    // isSignedIn: true
+    isSignedIn: state.auth.isSignedIn,
+    username: state.auth.username
   };
 };
 
@@ -39,7 +39,7 @@ const mapStateToProps = (state, ownProps) => {
 const Switch = connect(mapStateToProps)(
   branch(
     props => {
-      return props.isSignedIn;
+      return props.isSignedIn && props.username;
     },
     renderComponent(MainNavigator),
     renderComponent(PublicNavigator)

@@ -13,7 +13,7 @@ const Container = styled.View`
   background-color: white;
 `;
 const Row = styled.View`
-  padding: 10px;
+  padding: 5px;
 `;
 
 const Content = styled.Text`
