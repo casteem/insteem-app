@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import steem from "steem";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 import { signout } from "../../../src/services/auth/actions";
 import { View, ListView, Text, Button, StyleSheet, Image } from "react-native";
 // import SignIn from "../Auth/SignIn.js";
+import Loader from "insteem/src/components/Elements/Loader.js";
 import Icon from "react-native-vector-icons/Ionicons";
 import ProfileView from "./components/ProfileView";
 // import PostItem from "../Posts/components/PostItem/PostItem";
@@ -22,7 +24,17 @@ class ProfileScene extends React.Component {
   };
 
   render() {
-    return <ProfileView onSignout={this.props.onSignout} />;
+    const {
+      data: { loading, account: user, getFollowCount: followCount }
+    } = this.props;
+    if (loading) return <Loader />;
+    return (
+      <ProfileView
+        user={user}
+        onSignout={this.props.onSignout}
+        followCount={followCount}
+      />
+    );
   }
 }
 
@@ -41,6 +53,26 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
+
+const Query = gql`
+  query user($username: String!) {
+    account(username: $username) {
+      name
+      json_metadata
+      voting_power
+      reputation
+      post_count
+      created
+      reputation
+    }
+
+    getFollowCount(username: $username) {
+      follower_count
+      following_count
+    }
+  }
+`;
+
 ProfileScene.navigationOptions = {
   title: "Profile",
   tabBarIcon: ({ tintColor }) => (
@@ -48,4 +80,8 @@ ProfileScene.navigationOptions = {
   )
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileScene);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  graphql(Query, {
+    options: props => ({ variables: { username: props.username } })
+  })(ProfileScene)
+);
