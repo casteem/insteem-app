@@ -23,7 +23,6 @@ const Content = styled.Text`
 
 const ProfileView = props => {
   const { user, followCount } = props;
-  console.log(user);
   return (
     <Container>
       {props.isSignedIn ? (

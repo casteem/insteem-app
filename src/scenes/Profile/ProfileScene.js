@@ -41,7 +41,6 @@ class ProfileScene extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     isSignedIn: state.auth.isSignedIn,
-    // TODO: Fetch the user in an api call via a thunk in redux.
     username: state.auth.username
   };
 };
@@ -82,6 +81,10 @@ ProfileScene.navigationOptions = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   graphql(Query, {
-    options: props => ({ variables: { username: props.username } })
+    options: props => ({
+      variables: { username: props.username },
+      // Poll every 5 minutes.
+      pollInterval: 5 * 60 * 1000
+    })
   })(ProfileScene)
 );

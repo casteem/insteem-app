@@ -15,7 +15,6 @@ class StoryScene extends React.Component {
   render() {
     const { data: { loading, getContent: story } } = this.props;
     if (loading) return <Loader />;
-    console.log(this.props);
     const { params } = this.props.navigation.state;
     return <StoryItem story={story} />;
   }
