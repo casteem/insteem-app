@@ -24,6 +24,7 @@ const QUERY = gql`
   query getStory($author: String!, $permlink: String!) {
     getContent(author: $author, permlink: $permlink) {
       id
+      title
       author
       body
       net_votes

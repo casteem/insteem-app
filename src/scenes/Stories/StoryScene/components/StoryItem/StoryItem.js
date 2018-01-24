@@ -3,6 +3,7 @@ import _ from "lodash";
 import { StyleSheet, View, Text, ScrollView, WebView } from "react-native";
 import Markdown, { getUniqueID } from "react-native-markdown-renderer";
 import MarkdownIt from "markdown-it";
+import styled from "styled-components/native";
 // import HTMLView from "react-native-htmlview";
 // import Markdown from "react-native-easy-markdown";
 
@@ -25,6 +26,12 @@ class StoryItem extends React.Component {
         </View>
       )
     };
+
+    const Title = styled.Text`
+      font-size: 18px;
+      font-weight: bold;
+    `;
+
     // Get the format of the post: `markdown`, `html` or `markdown+html`.
     // NOTE: json_metadata returns an Object inside a String, so we have to
     // parse it first.
@@ -32,7 +39,7 @@ class StoryItem extends React.Component {
     return (
       <ScrollView style={style.container}>
         {/*<PostHeader post={post} />*/}
-        <Text style={style.title}>{story.title}</Text>
+        <Title>{story.title}</Title>
         <Markdown
           rules={rules}
           markdownit={MarkdownIt({
@@ -62,9 +69,5 @@ const style = StyleSheet.create({
   container: {
     padding: 10,
     backgroundColor: "white"
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 16
   }
 });
