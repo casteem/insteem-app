@@ -1,13 +1,12 @@
 import MarkdownIt from "markdown-it";
 import React from "react";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 import { ScrollView, View, Text, Alert } from "react-native";
 import StoryForm from "./components/StoryForm";
 import { updateStory, clearStory } from "insteem/src/services/stories/actions";
 import Markdown from "react-native-markdown-renderer";
-import {
-  createTagArray,
-  createPermLink
-} from "insteem/src/services/stories/helpers";
+import { createTagArray } from "insteem/src/services/stories/helpers";
 
 import { connect } from "react-redux";
 
@@ -18,31 +17,29 @@ class SubmitScene extends React.Component {
   clear() {
     this.props.onClearStory();
   }
-  submitStory() {
-    // callback
-    // (err, res) => {
-    //   if (err) {
-    //     Alert.alert("Couldn't submit Post");
-    //   } else if (res) {
-    //     TODO: Go to newly created post scene and clear post (redux).
-    // Alert.alert("Post sucessful submitted.");
-    // If submit successful clear the saved post.
-    // this.clear();
-    // this.props.navigation.navigate("Home");
-    // }
-    // }
-    // );
+  submitStory(mutate, navigation) {
+    mutate()
+      .then(result => {
+        const { data: { createPost: story } } = result;
+        navigation.navigate("Story", {
+          author: story.author,
+          permlink: story.permlink
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   render() {
-    const { story } = this.props;
+    const { story, submit, navigation } = this.props;
     return (
       <ScrollView style={styles.container}>
         <Text style={{ textAlign: "center", marginTop: 10 }}>
           Coming soon..
         </Text>
         <StoryForm
-          submit={this.submitStory.bind(this)}
+          submit={this.submitStory.bind(this, submit, navigation)}
           update={this.update.bind(this)}
           clear={this.clear.bind(this)}
           post={this.props.story}
@@ -69,6 +66,16 @@ SubmitScene.navigationOptions = {
   title: "Submit Story"
 };
 
+const Mutation = gql`
+  mutation create($story: PostInput!, $key: String!) {
+    createPost(post: $story, key: $key) {
+      id
+      author
+      permlink
+    }
+  }
+`;
+
 const mapStateToProps = state => ({
   user: state.auth.username,
   wif: state.auth.wif,
@@ -86,7 +93,26 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubmitScene);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  graphql(Mutation, {
+    // options: props => ({
+    //   variables: { story: props.story, key: props.wif }
+    // }),
+    props: ({ mutate, ownProps }) => ({
+      submit: () => {
+        const { story, user, wif } = ownProps;
+        // Converts tags into array
+        story.tags = createTagArray(story.tags);
+        return mutate({
+          variables: {
+            story: { ...story, author: user },
+            key: wif
+          }
+        });
+      }
+    })
+  })(SubmitScene)
+);
 
 const styles = {
   container: {

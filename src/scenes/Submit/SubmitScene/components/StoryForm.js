@@ -32,7 +32,7 @@ const StoryForm = props => {
         autoCapitalize="none"
         autoCorrect={false}
       />
-      <Button title="Submit" onPress={e => props.submit(e)} disabled={true} />
+      <Button title="Submit" onPress={props.submit} />
       <Button title="Clear" onPress={e => props.clear(e)} />
     </View>
   );

@@ -1,7 +1,6 @@
 import React from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import _ from "lodash";
 import { connect } from "react-redux";
 import FollowerView from "./components/FollowerView";
 import { View, Text, ListView } from "react-native";
