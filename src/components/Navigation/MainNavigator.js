@@ -1,6 +1,7 @@
 import React from "react";
 import { TabNavigator } from "react-navigation";
 
+import FollowerNavigator from "insteem/src/scenes/Follower/components/FollowerNavigator";
 import StoriesNavigator from "../../scenes/Stories/StoriesNavigator";
 import ProfileScene from "../../scenes/Profile/ProfileScene";
 
@@ -10,7 +11,7 @@ const MainNavigator = TabNavigator(
     Home: { screen: StoriesNavigator },
     // Search: { screen: SearchNavigator },
     // New: { screen: SubmitNavigator },
-    // Votes: { screen: FollowerNavigator },
+    Follower: { screen: FollowerNavigator },
     Profile: { screen: ProfileScene }
   },
   {
