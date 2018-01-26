@@ -28,19 +28,15 @@ const openExternalLink = user => {
 // Render a single post item in the post ListView.
 export default ({ follower, navigation }) => {
   return (
-    // TODO: Add throttle for press event.
-    // If clicked fast the post is shown x times (x=clicks).
-    (
-      <View style={style.container}>
-        <View>
-          <Text
-            style={style.column}
-            onPress={openExternalLink.bind(this, follower.follower)}
-          >
-            {follower.follower}
-          </Text>
-        </View>
+    <View style={style.container}>
+      <View>
+        <Text
+          style={style.column}
+          onPress={openExternalLink.bind(this, follower.follower)}
+        >
+          {follower.follower}
+        </Text>
       </View>
-    )
+    </View>
   );
 };

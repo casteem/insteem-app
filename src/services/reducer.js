@@ -5,17 +5,17 @@
  `combineReducers()` API from redux.
  */
 
-import { combineReducers } from "redux";
 import { persistCombineReducers } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import auth from "./auth/reducer";
+import stories from "./stories/reducer";
 
 const config = {
   key: "root",
   storage
 };
 
-const reducer = persistCombineReducers(config, { auth });
+const reducer = persistCombineReducers(config, { auth, stories });
 
 export default reducer;

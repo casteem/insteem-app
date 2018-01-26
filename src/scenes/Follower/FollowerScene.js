@@ -19,7 +19,6 @@ class FollowerScene extends React.Component {
       data: { loading, getFollowCount: follow, getFollowers: followers }
     } = this.props;
     if (loading) return <Loader />;
-    console.log(followers);
     return (
       <View style={style.container}>
         <View>
